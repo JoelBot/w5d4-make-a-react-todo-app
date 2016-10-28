@@ -60,15 +60,40 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// variables
+	// imports react and children below
+	var createBtn = document.querySelector('#createBtn');
+	var inputField = document.querySelector('#inputField');
+
+	// Event listeners for input box and button
+
+	createBtn.addEventListener('click', getInputValue);
+	inputField.addEventListener('keypress', createEnterKey);
+
+	// functions
+	function getInputValue() {
+	    // console.log(inputField.value)
+	    var createdObject = {};
+	    // var date = new Date
+	    createdObject.title = inputField.value;
+	    todos.unshift(createdObject);
+	    renderView(todos);
+	    // console.log(todos)
+	}
+
+	function createEnterKey(event) {
+	    if (event.key === 'enter') {
+	        getInputValue();
+	    }
+	}
 	// creates rendering machine for React
 	// function renderView(todo) {
-	// imports react and children below
-	window.renderView = function (todo) {
-	    _reactDom2.default.render(_react2.default.createElement(_Todos2.default, { data: todo }), document.getElementById('todoList'));
+	window.renderView = function (data) {
+	    _reactDom2.default.render(_react2.default.createElement(_Todos2.default, { data: data }), document.getElementById('todoList'));
 	};
 
 	// renders the page per above
-	renderView(_Todos2.default);
+	renderView(todos);
 
 /***/ },
 /* 1 */
@@ -21457,9 +21482,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Todos = function Todos(todo) {
-	    var TodoItems = todo.data.map(function (todo, i) {
-	        return _react2.default.createElement(Todo, { data: todo, key: i });
+	var Todos = function Todos(props) {
+	    console.log(props);
+	    var TodoItems = props.data.map(function (todo, i) {
+	        return _react2.default.createElement(_TodoItem2.default, { data: todo, key: i });
 	    });
 
 	    return _react2.default.createElement(
@@ -21494,7 +21520,7 @@
 
 	// nothing else to import because this is the children
 
-	var Todo = function Todo(todo) {
+	var Todo = function Todo(props) {
 	    return _react2.default.createElement(
 	        "div",
 	        { className: "row todo-item" },
@@ -21504,19 +21530,19 @@
 	            _react2.default.createElement(
 	                "h3",
 	                null,
-	                todo.data.title
+	                props.data.title
 	            ),
 	            _react2.default.createElement(
 	                "p",
 	                { className: "lead" },
 	                "Published On ",
-	                todo.data.date
+	                props.data.date
 	            ),
 	            _react2.default.createElement(
 	                "span",
 	                { className: "small" },
 	                "Author: ",
-	                todo.data.author
+	                props.data.author
 	            )
 	        )
 	    );
