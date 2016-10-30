@@ -8,6 +8,7 @@ window.renderView = function(data) { // renders react portion of page
         <Posts data={data} />, // renders one component.  This is the enntire appliation and nested within.  Posts is a class and is yellow plus uppercase.  Is JSX, looks like HTML but is invalid JS.  Babel is converting this to appropriate JS code.
         // sending in props which look like data={data}
         // render can only mount (/) component
+        // <Posts... is imported from import Posts from '../components/Posts'
         document.getElementById('posts')) // always must be hooked to an element in a page.
 }
 

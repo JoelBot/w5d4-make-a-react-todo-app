@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
 import TodoItem from './TodoItem'
 
+var myStorage = localStorage
+
 const Todos = (props) => {
-    console.log(props)
+    // console.log(props)
+    _.sortBy(props ["title"])
     const TodoItems = props.data.map((todo, i) => {
+        // console.log(todo)
+        // myStorage.setItem('title:' , {todo})
         return <TodoItem data={todo} key={i} />
     })
-
-    return <div>
-        {/* <input id="inputField" type="text" placeholder="Add to-do..." />
-        <button id="createBtn" type="button" className="btn btn-primary">Create</button> */}
-        <h1>ToDO List:</h1>
+console.log(TodoItems)
+    // return <div>
+    //     {TodoItems}
+    // </div>
+    return <ul className="list-group">
+        <h1>Count of Todo Items: {props.data.length}</h1>
         {TodoItems}
-    </div>
+    </ul>
 }
 
+// console.log(myStorage)
 export default Todos
